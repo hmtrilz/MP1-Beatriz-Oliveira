@@ -39,6 +39,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "setup": "node ./bin/setup.js",
-    "eslint": "eslint ./src --ext .js --fix"
+    "eslint": "eslint ./src --ext .js --fix",
+    "prettier": "prettier --write ."
   }
 }
