@@ -7,7 +7,7 @@ stages:
 
    - compile
 
-   # - deploy
+   - deploy
 
 variables:
    FF_USE_FASTZIP: "true"
@@ -67,12 +67,12 @@ compile:
    - if: '$CI_COMMIT_BRANCH == "master"'
    - when: always
 
-# deploy:
-#   stage: deploy
+deploy:
+ stage: deploy
 
-#   script:
-#     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+ script:
+  - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
 
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == "master"'
-#     - when: always
+ rules:
+  - if: '$CI_COMMIT_BRANCH == "master"'
+  - when: always
