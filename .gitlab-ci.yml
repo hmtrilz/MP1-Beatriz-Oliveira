@@ -5,7 +5,7 @@ stages:
 
    - test
 
-   # - compile
+   - compile
 
    # - deploy
 
@@ -57,15 +57,15 @@ jest:
 
    allow_failure: false
 
- #compile:
-  # stage: compile
+compile:
+  stage: compile
 
-  # script:
-   #  - npm run build
+  script:
+   - npm run build
 
-  # rules:
-  #   - if: '$CI_COMMIT_BRANCH == "master"'
-  #   - when: always
+  rules:
+   - if: '$CI_COMMIT_BRANCH == "master"'
+   - when: always
 
 # deploy:
 #   stage: deploy
