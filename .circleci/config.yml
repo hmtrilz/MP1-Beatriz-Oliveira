@@ -11,19 +11,7 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          command: npm install
-
-  lint:
-    docker:
-      - image: cimg/node:17.1.0
-
-    steps:
-      - checkout
-      - node/install-packages
-      - run: 
-          command: npm run lint
-
+      - run: npm install
   prettier:
     docker:
       - image: cimg/node:17.1.0
@@ -44,17 +32,44 @@ jobs:
       - run:
           command: npm run jest
 
+  lint:
+    docker:
+      - image: cimg/node:17.1.0
+
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run lint
+
+  deploy:
+    docker:
+      - image: cimg/node:17.1.0
+
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run build
+      - run:
+          command: npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
     jobs:
       - install
+      - prettier:
+          requires:
+            - install
       - jest:
           requires:
             - install
       - lint:
           requires:
             - install
-      - prettier:
+      - deploy:
           requires:
-            - install
+            - prettier
+            - jest
+            - lint
