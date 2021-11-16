@@ -35,8 +35,3 @@ workflows:
       - prettier:
           requires:
             - install
-      - build:
-          requires:
-            - prettier
-            - jest
-            - lint
