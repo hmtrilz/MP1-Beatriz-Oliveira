@@ -73,19 +73,19 @@ workflows:
             - prettier
             - jest
             - lint
-            
+
           filters:
             branches:
               only:
                 - master
-  nightly:
+  midnight:
     triggers:
       - schedule:
           cron: "0 0 * * *"
           filters:
             branches:
               only:
-                  - master
+                - master
     jobs:
       - install
       - prettier
