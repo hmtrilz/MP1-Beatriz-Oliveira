@@ -3,8 +3,6 @@ version: 2.1
 orbs:
   node: circleci/node@4.7.0
 
-
-
 # Define the jobs we want to run for this project
 jobs:
   install:
@@ -28,7 +26,17 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - install
-      - test:
+      - jest:
           requires:
             - install
+      - lint:
+          requires:
+            - install
+      - prettier:
+          requires:
+            - install
+      - build:
+          requires:
+            - prettier
+            - jest
+            - lint
