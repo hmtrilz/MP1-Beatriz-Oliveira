@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-  test:
+  jest:
     docker:
       - image: cimg/node:17.1.0
 
